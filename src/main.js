@@ -414,14 +414,18 @@ function setLanguage(lang) {
   // Update button active state
   const btnEn = document.getElementById('btn-lang-en');
   const btnAr = document.getElementById('btn-lang-ar');
-  if (btnEn && btnAr) {
-    if (lang === 'ar') {
-      btnAr.classList.add('active');
-      btnEn.classList.remove('active');
-    } else {
-      btnEn.classList.add('active');
-      btnAr.classList.remove('active');
-    }
+  const btnDrawerEn = document.getElementById('btn-drawer-lang-en');
+  const btnDrawerAr = document.getElementById('btn-drawer-lang-ar');
+  if (lang === 'ar') {
+    btnAr?.classList.add('active');
+    btnEn?.classList.remove('active');
+    btnDrawerAr?.classList.add('active');
+    btnDrawerEn?.classList.remove('active');
+  } else {
+    btnEn?.classList.add('active');
+    btnAr?.classList.remove('active');
+    btnDrawerEn?.classList.add('active');
+    btnDrawerAr?.classList.remove('active');
   }
 
   // Update all translatable elements
@@ -838,35 +842,63 @@ function initScrollEffects() {
     }
   });
 
-  // Mobile menu toggle
+  // Mobile Off-Canvas Drawer Management
   const mobileBtn = document.getElementById('mobile-toggle-btn');
-  const navMenu = document.getElementById('nav-menu');
-  if (mobileBtn && navMenu) {
-    mobileBtn.addEventListener('click', () => {
-      const isVisible = navMenu.style.display === 'flex';
-      navMenu.style.display = isVisible ? 'none' : 'flex';
-      if (!isVisible) {
-        navMenu.style.flexDirection = 'column';
-        navMenu.style.position = 'absolute';
-        navMenu.style.top = '100%';
-        navMenu.style.left = '0';
-        navMenu.style.width = '100%';
-        navMenu.style.background = '#ffffff';
-        navMenu.style.padding = '20px';
-        navMenu.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-        navMenu.style.gap = '15px';
-      }
-    });
+  const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  const drawerCloseBtn = document.getElementById('drawer-close-btn');
 
-    // Close on click nav link
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          navMenu.style.display = 'none';
-        }
-      });
-    });
+  function openDrawer() {
+    drawer?.classList.add('active');
+    backdrop?.classList.add('active');
+    drawer?.setAttribute('aria-hidden', 'false');
+    backdrop?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
+
+  function closeDrawer() {
+    drawer?.classList.remove('active');
+    backdrop?.classList.remove('active');
+    drawer?.setAttribute('aria-hidden', 'true');
+    backdrop?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  mobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openDrawer();
+  });
+
+  drawerCloseBtn?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+
+  // Close drawer on clicking any navigation link inside it
+  document.querySelectorAll('#drawer-nav-list a').forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // Drawer emergency link
+  document.getElementById('drawer-emergency-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDrawer();
+    openModal('emergency-modal');
+  });
+
+  // Drawer donate button
+  document.getElementById('drawer-donate-btn')?.addEventListener('click', (e) => {
+    closeDrawer();
+  });
+
+  // Drawer language toggle buttons
+  document.getElementById('btn-drawer-lang-en')?.addEventListener('click', () => setLanguage('en'));
+  document.getElementById('btn-drawer-lang-ar')?.addEventListener('click', () => setLanguage('ar'));
+
+  // Close drawer on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('active')) {
+      closeDrawer();
+    }
+  });
 
   // Active section spy
   const sections = document.querySelectorAll('section[id]');

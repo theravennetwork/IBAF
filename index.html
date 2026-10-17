@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Islamic Burial Assistance Foundation (IBAF) | Serving Humanity and Upholding Islamic Values</title>
     
     <!-- SEO Meta Tags -->
@@ -100,6 +100,54 @@
         </div>
       </div>
     </header>
+
+    <!-- OFF-CANVAS MOBILE NAVIGATION DRAWER -->
+    <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+      <div class="drawer-header">
+        <img src="/assets/ibaf-logo.png" alt="IBAF Logo" class="drawer-logo" />
+        <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close navigation drawer">&times;</button>
+      </div>
+
+      <!-- 24/7 Emergency Dispatch Quick Card inside Drawer -->
+      <div class="drawer-emergency-card">
+        <a href="#emergency-modal" class="drawer-emergency-link" id="drawer-emergency-link">
+          <span class="pulse-dot"></span>
+          <div class="drawer-em-text">
+            <small data-i18n="topBarEmergency">24/7 Abuja Emergency Helpline</small>
+            <strong>+234 (0) 800-IBAF-HELP</strong>
+          </div>
+          <i class="fa-solid fa-phone-volume"></i>
+        </a>
+      </div>
+
+      <!-- Drawer Navigation Links -->
+      <ul class="drawer-nav-list" id="drawer-nav-list">
+        <li><a href="#home" class="drawer-link"><i class="fa-solid fa-house"></i> <span data-i18n="navHome">Home</span></a></li>
+        <li><a href="#about" class="drawer-link"><i class="fa-solid fa-circle-info"></i> <span data-i18n="navAbout">About Us</span></a></li>
+        <li><a href="#programs" class="drawer-link"><i class="fa-solid fa-hand-holding-heart"></i> <span data-i18n="navPrograms">Our Programs</span></a></li>
+        <li><a href="#impact" class="drawer-link"><i class="fa-solid fa-chart-line"></i> <span data-i18n="navImpact">Impact & Reports</span></a></li>
+        <li><a href="#governance" class="drawer-link"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="navGovernance">Governance</span></a></li>
+        <li><a href="#partners" class="drawer-link"><i class="fa-solid fa-handshake"></i> <span data-i18n="navPartners">Partners</span></a></li>
+        <li><a href="#news" class="drawer-link"><i class="fa-solid fa-newspaper"></i> <span data-i18n="navNews">News & Updates</span></a></li>
+        <li><a href="#involved" class="drawer-link"><i class="fa-solid fa-users"></i> <span data-i18n="navInvolved">Get Involved</span></a></li>
+        <li><a href="#contact" class="drawer-link"><i class="fa-solid fa-envelope"></i> <span data-i18n="navContact">Contact Us</span></a></li>
+      </ul>
+
+      <!-- Drawer Language Switcher & Donate CTA -->
+      <div class="drawer-footer">
+        <div class="drawer-lang-row">
+          <span>Language / اللغة:</span>
+          <div class="lang-switch">
+            <button class="lang-btn active" id="btn-drawer-lang-en" data-lang="en">EN</button>
+            <button class="lang-btn" id="btn-drawer-lang-ar" data-lang="ar">العربية</button>
+          </div>
+        </div>
+        <a href="#support" class="btn btn-gold drawer-donate-btn" id="drawer-donate-btn">
+          <i class="fa-solid fa-heart"></i> <span data-i18n="btnSupportMission">Support Our Mission</span>
+        </a>
+      </div>
+    </aside>
 
     <!-- MAIN CONTENT -->
     <main>
